@@ -29,6 +29,7 @@ namespace AutoTyper
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel_Move = new System.Windows.Forms.Panel();
             this.label_MinimizeForm = new System.Windows.Forms.Label();
@@ -43,6 +44,9 @@ namespace AutoTyper
             this.textBox_Delay = new System.Windows.Forms.TextBox();
             this.checkBox_Infinite = new System.Windows.Forms.CheckBox();
             this.button_Start = new System.Windows.Forms.Button();
+            this.timerType = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox_Text = new System.Windows.Forms.RichTextBox();
+            this.buttonStop = new System.Windows.Forms.Button();
             this.panel_Move.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +110,7 @@ namespace AutoTyper
             this.textBox_Speed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.textBox_Speed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_Speed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.textBox_Speed.Location = new System.Drawing.Point(100, 35);
+            this.textBox_Speed.Location = new System.Drawing.Point(103, 197);
             this.textBox_Speed.Name = "textBox_Speed";
             this.textBox_Speed.Size = new System.Drawing.Size(100, 22);
             this.textBox_Speed.TabIndex = 2;
@@ -115,7 +119,7 @@ namespace AutoTyper
             // label_Speed
             // 
             this.label_Speed.AutoSize = true;
-            this.label_Speed.Location = new System.Drawing.Point(34, 38);
+            this.label_Speed.Location = new System.Drawing.Point(37, 200);
             this.label_Speed.Name = "label_Speed";
             this.label_Speed.Size = new System.Drawing.Size(62, 13);
             this.label_Speed.TabIndex = 3;
@@ -124,7 +128,7 @@ namespace AutoTyper
             // label_Repeat
             // 
             this.label_Repeat.AutoSize = true;
-            this.label_Repeat.Location = new System.Drawing.Point(51, 66);
+            this.label_Repeat.Location = new System.Drawing.Point(54, 228);
             this.label_Repeat.Name = "label_Repeat";
             this.label_Repeat.Size = new System.Drawing.Size(43, 13);
             this.label_Repeat.TabIndex = 5;
@@ -135,7 +139,7 @@ namespace AutoTyper
             this.textBox_Repeat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.textBox_Repeat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_Repeat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.textBox_Repeat.Location = new System.Drawing.Point(100, 63);
+            this.textBox_Repeat.Location = new System.Drawing.Point(103, 225);
             this.textBox_Repeat.Name = "textBox_Repeat";
             this.textBox_Repeat.Size = new System.Drawing.Size(100, 22);
             this.textBox_Repeat.TabIndex = 4;
@@ -144,7 +148,7 @@ namespace AutoTyper
             // label_Delay
             // 
             this.label_Delay.AutoSize = true;
-            this.label_Delay.Location = new System.Drawing.Point(58, 93);
+            this.label_Delay.Location = new System.Drawing.Point(61, 255);
             this.label_Delay.Name = "label_Delay";
             this.label_Delay.Size = new System.Drawing.Size(36, 13);
             this.label_Delay.TabIndex = 7;
@@ -155,7 +159,7 @@ namespace AutoTyper
             this.textBox_Delay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.textBox_Delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_Delay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.textBox_Delay.Location = new System.Drawing.Point(100, 91);
+            this.textBox_Delay.Location = new System.Drawing.Point(103, 253);
             this.textBox_Delay.Name = "textBox_Delay";
             this.textBox_Delay.Size = new System.Drawing.Size(100, 22);
             this.textBox_Delay.TabIndex = 6;
@@ -164,31 +168,63 @@ namespace AutoTyper
             // checkBox_Infinite
             // 
             this.checkBox_Infinite.AutoSize = true;
-            this.checkBox_Infinite.Location = new System.Drawing.Point(207, 66);
+            this.checkBox_Infinite.Location = new System.Drawing.Point(210, 228);
             this.checkBox_Infinite.Name = "checkBox_Infinite";
             this.checkBox_Infinite.Size = new System.Drawing.Size(63, 17);
             this.checkBox_Infinite.TabIndex = 8;
             this.checkBox_Infinite.Text = "Infinite";
             this.checkBox_Infinite.UseVisualStyleBackColor = true;
+            this.checkBox_Infinite.CheckedChanged += new System.EventHandler(this.checkBox_Infinite_CheckedChanged);
             // 
             // button_Start
             // 
             this.button_Start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
             this.button_Start.FlatAppearance.BorderSize = 0;
             this.button_Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Start.Location = new System.Drawing.Point(110, 119);
+            this.button_Start.Location = new System.Drawing.Point(75, 281);
             this.button_Start.Name = "button_Start";
             this.button_Start.Size = new System.Drawing.Size(75, 23);
             this.button_Start.TabIndex = 9;
             this.button_Start.Text = "Start";
             this.button_Start.UseVisualStyleBackColor = false;
+            this.button_Start.Click += new System.EventHandler(this.button_Start_Click);
+            // 
+            // timerType
+            // 
+            this.timerType.Tick += new System.EventHandler(this.timerType_Tick);
+            // 
+            // richTextBox_Text
+            // 
+            this.richTextBox_Text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.richTextBox_Text.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBox_Text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.richTextBox_Text.Location = new System.Drawing.Point(5, 31);
+            this.richTextBox_Text.Name = "richTextBox_Text";
+            this.richTextBox_Text.Size = new System.Drawing.Size(290, 160);
+            this.richTextBox_Text.TabIndex = 10;
+            this.richTextBox_Text.Text = "Text here";
+            // 
+            // buttonStop
+            // 
+            this.buttonStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
+            this.buttonStop.FlatAppearance.BorderSize = 0;
+            this.buttonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStop.Location = new System.Drawing.Point(156, 281);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.TabIndex = 11;
+            this.buttonStop.Text = "Stop";
+            this.buttonStop.UseVisualStyleBackColor = false;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(25)))), ((int)(((byte)(31)))));
-            this.ClientSize = new System.Drawing.Size(300, 150);
+            this.ClientSize = new System.Drawing.Size(300, 310);
+            this.Controls.Add(this.buttonStop);
+            this.Controls.Add(this.richTextBox_Text);
             this.Controls.Add(this.button_Start);
             this.Controls.Add(this.checkBox_Infinite);
             this.Controls.Add(this.label_Delay);
@@ -203,8 +239,8 @@ namespace AutoTyper
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(300, 150);
-            this.MinimumSize = new System.Drawing.Size(300, 150);
+            this.MaximumSize = new System.Drawing.Size(300, 310);
+            this.MinimumSize = new System.Drawing.Size(300, 310);
             this.Name = "Main";
             this.Text = "AutoTyper";
             this.Load += new System.EventHandler(this.Main_Load);
@@ -231,6 +267,9 @@ namespace AutoTyper
         private System.Windows.Forms.TextBox textBox_Delay;
         private System.Windows.Forms.CheckBox checkBox_Infinite;
         private System.Windows.Forms.Button button_Start;
+        private System.Windows.Forms.Timer timerType;
+        private System.Windows.Forms.RichTextBox richTextBox_Text;
+        private System.Windows.Forms.Button buttonStop;
     }
 }
 
