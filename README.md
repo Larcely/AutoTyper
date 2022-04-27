@@ -1,5 +1,5 @@
 <div align='center'>
-# AutoTyper
+#AutoTyper
 You can type whatever you want with delay-repeat-speed settings. <br> <br>
 
 • It's a form app,
